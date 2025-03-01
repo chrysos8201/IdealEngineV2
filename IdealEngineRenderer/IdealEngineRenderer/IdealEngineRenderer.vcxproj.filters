@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="framework.h" />
+    <ClInclude Include="D3D12Thirdparty.h">
+      <Filter>Renderer\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="D3D12Renderer.h">
+      <Filter>Renderer\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="D3D12Definition.h">
+      <Filter>Renderer\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="Types.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="D3D12Device.h">
+      <Filter>Renderer\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="Core.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="D3D12CommandList.h">
+      <Filter>Renderer\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="D3D12Resource.h">
+      <Filter>Renderer\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="D3D12Util.h">
+      <Filter>Renderer\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="D3D12Descriptors.h">
+      <Filter>Renderer\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="IndexCreator.h" />
+    <ClInclude Include="D3D12Texture.h">
+      <Filter>Renderer\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="D3D12Viewport.h">
+      <Filter>Renderer\D3D12</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="D3D12Renderer.cpp">
+      <Filter>Renderer\D3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="D3D12Device.cpp">
+      <Filter>Renderer\D3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="D3D12CommandList.cpp">
+      <Filter>Renderer\D3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="D3D12Resource.cpp">
+      <Filter>Renderer\D3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="D3D12Util.cpp">
+      <Filter>Renderer\D3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="D3D12Descriptors.cpp">
+      <Filter>Renderer\D3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="IndexCreator.cpp" />
+    <ClCompile Include="D3D12Texture.cpp">
+      <Filter>Renderer\D3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="D3D12Viewport.cpp">
+      <Filter>Renderer\D3D12</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{d8ae9304-0fa2-4082-9279-b0f2cd44c458}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\D3D12">
+      <UniqueIdentifier>{2951aca0-7a81-425a-8729-9168e9dcf76e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{b79ea0a0-9943-46ea-82f3-a17ab1883e9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Util">
+      <UniqueIdentifier>{fe25d9cd-3089-4e59-ae14-89f3ef7e1870}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\D3D12\public">
+      <UniqueIdentifier>{b1412b3d-c89b-4fb4-9224-e4b6382369d9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>
