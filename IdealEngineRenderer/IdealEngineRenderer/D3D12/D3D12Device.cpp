@@ -29,16 +29,23 @@ CD3D12Device::CD3D12Device(bool bWithDebug)
 	, FenceEvent(NULL)
 	, MaxStandardDescriptors(0)
 	, MaxSamplerDescriptors(0)
+	, CurrentContextIndex(0)
+	, LastFenceValues()
 {
-	CreateDevice(bWithDebug);
-	CreateHeaps();
-	CreateFence();
-	CreateCommandContexts();
+	bDebugMode = bWithDebug;
 }
 
 CD3D12Device::~CD3D12Device()
 {
 
+}
+
+void CD3D12Device::Init()
+{
+	CreateDevice(bDebugMode);
+	CreateHeaps();
+	CreateFence();
+	CreateCommandContexts();
 }
 
 void CD3D12Device::Destroy()

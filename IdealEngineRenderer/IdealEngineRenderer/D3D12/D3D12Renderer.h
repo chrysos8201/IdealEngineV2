@@ -5,6 +5,7 @@
 #include "Core/Core.h"
 #include "D3D12/D3D12Thirdparty.h"
 #include "D3D12/D3D12Definition.h"
+
 class CD3D12Device;
 class CD3D12CommandAllocator;
 class CD3D12CommandList;
@@ -23,6 +24,7 @@ public:
 
 	virtual void Init() override;
 	virtual void Render() override;
+	virtual void Destroy() override;
 
 private:
 	void CreateSwapChains();
@@ -36,4 +38,3 @@ private:
 	std::vector<std::shared_ptr<CD3D12Texture>> SwapChainTextures;
 	std::shared_ptr<CD3D12Viewport> Viewport;
 };
-

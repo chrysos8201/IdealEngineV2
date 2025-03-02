@@ -5,6 +5,10 @@
 #include "IdealEngineRendererDemo.h"
 #define MAX_LOADSTRING 100
 
+#include "../IdealEngineRenderer/public/IdealRendererV2Factory.h"
+#include "../IdealEngineRenderer/public/IdealRendererV2.h"
+#include <memory>
+
 // 전역 변수:
 HINSTANCE hInst;                                // 현재 인스턴스입니다.
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
@@ -30,8 +34,15 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 {
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
+    
+  
+    // DLL Load
+	HMODULE hDll = LoadLibraryA("..//x64//Debug//IdealEngineRenderer.dll");
+    typedef void (*CreateRendererFactory)(std::shared_ptr<Ideal::IdealRendererV2>&, const IdealRendererV2Desc&);
+	CreateRendererFactory CreateRenderer = (CreateRendererFactory)GetProcAddress(hDll, "CreateRenderer2");
 
-    // TODO: 여기에 코드를 입력합니다.
+	typedef void (*DestroyRendererFactory)(std::shared_ptr<Ideal::IdealRendererV2>&);
+	DestroyRendererFactory DestroyRenderer = (DestroyRendererFactory)GetProcAddress(hDll, "DestroyRenderer");
 
     // 전역 문자열을 초기화합니다.
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
@@ -46,10 +57,23 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_IDEALENGINERENDERERDEMO));
 
-    MSG msg;
+    MSG msg = {};
+
+    //////////////////////// Init
+
+	IdealRendererV2Desc rendererDesc;
+	rendererDesc.Hwnd = g_hWnd;
+	rendererDesc.Width = WIDTH;
+	rendererDesc.Height = HEIGHT;
+	rendererDesc.bDebugMode = true;
+	rendererDesc.bTearingSupport = true;
+
+	std::shared_ptr<Ideal::IdealRendererV2> IdealRenderer;
+	CreateRenderer(IdealRenderer, rendererDesc);
+	//IdealRenderer->Init();
 
     // 기본 메시지 루프입니다:
-    while (GetMessage(&msg, nullptr, 0, 0))
+    while (msg.message != WM_QUIT)
     {
         if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
         {
@@ -74,9 +98,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			}
             			// 게임 루프
 			// 게임 루프는 여기에 작성
+			IdealRenderer->Render();
         }
     }
-
+    IdealRenderer->Destroy();
+	DestroyRenderer(IdealRenderer);
+    FreeLibrary(hDll);
     return (int) msg.wParam;
 }
 

@@ -31,7 +31,7 @@ CD3D12CommandList::CD3D12CommandList(std::shared_ptr<CD3D12Device> Device, std::
 				CommandListType,
 				CommandAllocator->GetCommandAllocator().Get(),
 				nullptr,
-				IID_PPV_ARGS(GraphicsCommandList9.GetAddressOf())
+				IID_PPV_ARGS(GraphicsCommandList4.GetAddressOf())
 			));
 			break;
 		case D3D12_COMMAND_LIST_TYPE_COPY:
@@ -53,7 +53,7 @@ void CD3D12CommandList::Reset(std::shared_ptr<CD3D12CommandAllocator> CommandAll
 {
 	if (IsClosed())
 	{
-		VERIFYD3D12RESULT(GraphicsCommandList9->Reset(CommandAllocator->GetCommandAllocator().Get(), nullptr));
+		VERIFYD3D12RESULT(GraphicsCommandList4->Reset(CommandAllocator->GetCommandAllocator().Get(), nullptr));
 	}
 }
 
@@ -61,7 +61,7 @@ void CD3D12CommandList::Close()
 {
 	if (IsOpen())
 	{
-		VERIFYD3D12RESULT(GraphicsCommandList9->Close());
+		VERIFYD3D12RESULT(GraphicsCommandList4->Close());
 		bClosed = true;
 	}
 }

@@ -21,6 +21,8 @@ public:
 
 	void SetResourceState(D3D12_RESOURCE_STATES After) { CurrentResourceState = After; }
 	D3D12_RESOURCE_STATES GetResourceState() const { return CurrentResourceState; }
+	
+	void Destroy();
 
 public:
 	void EmplaceSRV(const CD3D12DescriptorHandle& InSRVHandle);

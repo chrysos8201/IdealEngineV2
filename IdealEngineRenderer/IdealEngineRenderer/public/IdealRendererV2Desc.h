@@ -1,5 +1,5 @@
 #pragma once
-
+#include <windows.h>
 struct IdealRendererV2Desc
 {
 	IdealRendererV2Desc()

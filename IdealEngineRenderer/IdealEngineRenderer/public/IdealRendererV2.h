@@ -1,5 +1,7 @@
 #pragma once
 
+
+
 namespace Ideal
 {
 	class IdealRendererV2
@@ -11,5 +13,7 @@ namespace Ideal
 	public:
 		virtual void Init() abstract;
 		virtual void Render() abstract;
+		virtual void Destroy() abstract;
 	};
+
 }

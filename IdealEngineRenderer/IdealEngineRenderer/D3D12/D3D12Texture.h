@@ -8,6 +8,7 @@ class CD3D12Texture : public CD3D12Resource
 {
 public:
 	CD3D12Texture(ComPtr<ID3D12Resource> InResource);
+	virtual ~CD3D12Texture() {};
 
 private:
 	uint32 Width;

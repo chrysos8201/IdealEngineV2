@@ -28,7 +28,7 @@ private:
 public:
 	CD3D12CommandList(std::shared_ptr<CD3D12Device> Device, std::shared_ptr<CD3D12CommandAllocator> CommandAllocator);
 
-	ComPtr<ID3D12GraphicsCommandList> GetGraphicsCommandList() { return GraphicsCommandList9; }
+	ComPtr<ID3D12GraphicsCommandList> GetGraphicsCommandList() { return GraphicsCommandList4; }
 
 	void Reset(std::shared_ptr<CD3D12CommandAllocator> CommandAllocator);
 	void Close();
@@ -40,7 +40,7 @@ public:
 
 private:
 	ComPtr<ID3D12CommandList> CommandList;
-	ComPtr<ID3D12GraphicsCommandList9> GraphicsCommandList9;
+	ComPtr<ID3D12GraphicsCommandList4> GraphicsCommandList4;
 
 	bool bClosed = false;
 };

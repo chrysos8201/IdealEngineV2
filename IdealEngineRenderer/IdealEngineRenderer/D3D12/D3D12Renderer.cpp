@@ -16,6 +16,7 @@ void CD3D12Renderer::Init()
 {
 	bool bDebugMode = true;
 	Device = std::make_shared<CD3D12Device>(bDebugMode);
+	Device->Init();
 
 	//-------Viewport-------//
 	Viewport = std::make_shared<CD3D12Viewport>(RendererDesc.Width, RendererDesc.Height);
@@ -42,8 +43,6 @@ void CD3D12Renderer::Render()
 	auto swapChainCpuHandle = swapChainRTV.GetCPUDescriptorHandleStart();
 	commandList->GetGraphicsCommandList()->OMSetRenderTargets(1, &swapChainCpuHandle, FALSE, nullptr);
 	
-	
-
 	// End Render
 	Device->GetCommandContext().TransitionResource(currentSwapChainTexture, D3D12_RESOURCE_STATE_PRESENT);
 	Device->GetCommandContext().CommandList->Close();
@@ -51,7 +50,6 @@ void CD3D12Renderer::Render()
 	Device->GetCommandQueue()->ExecuteCommandLists(_countof(ppCommandLists), ppCommandLists);
 
 	// Present
-	// 2025.02.25 여기 하는 중
 	Device->Fence();
 	uint32 SyncInterval = 0;
 	uint32 PresentFlags = 0;
@@ -62,6 +60,24 @@ void CD3D12Renderer::Render()
 	FrameIndex = SwapChain->GetCurrentBackBufferIndex();
 	Device->MoveToNextContextIndex();
 
+}
+
+void CD3D12Renderer::Destroy()
+{
+	// Destroy
+	Device->Fence();
+	for (uint32 i = 0; i < MAX_PENDING_FRAME_COUNT; i++)
+	{
+		Device->MoveToNextContextIndex();
+	}
+
+	for (int i = 0; i < MAX_PENDING_FRAME_COUNT; i++)
+	{
+		SwapChainTextures[i]->Destroy();
+	}
+	SwapChainTextures.clear();
+
+	Device->Destroy();
 }
 
 void CD3D12Renderer::CreateSwapChains()
@@ -81,7 +97,7 @@ void CD3D12Renderer::CreateSwapChains()
 	ComPtr<IDXGISwapChain1> swapChain;
 	VERIFYD3D12RESULT(Device->GetDXGIFactory7()->CreateSwapChainForHwnd(
 		Device->GetCommandQueue().Get(),
-		*(HWND*)RendererDesc.Hwnd,
+		(HWND)RendererDesc.Hwnd,
 		&swapChainDesc,
 		nullptr,
 		nullptr,
@@ -89,7 +105,7 @@ void CD3D12Renderer::CreateSwapChains()
 	));
 
 	VERIFYD3D12RESULT(Device->GetDXGIFactory7()->MakeWindowAssociation(
-		*(HWND*)RendererDesc.Hwnd,
+		(HWND)RendererDesc.Hwnd,
 		DXGI_MWA_NO_ALT_ENTER
 	));
 
@@ -97,6 +113,7 @@ void CD3D12Renderer::CreateSwapChains()
 	FrameIndex = SwapChain->GetCurrentBackBufferIndex();
 
 	// Set Texture
+	SwapChainTextures.resize(SWAP_CHAIN_FRAME_COUNT);
 	for (uint32 i = 0; i < SWAP_CHAIN_FRAME_COUNT; i++)
 	{
 		ComPtr<ID3D12Resource> resource;

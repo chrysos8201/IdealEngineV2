@@ -69,8 +69,11 @@ D3D12_GPU_DESCRIPTOR_HANDLE CD3D12DescriptorHandle::GetGPUDescriptorHandleByInde
 void CD3D12DescriptorHandle::Free()
 {
 	//OwnerHeap.lock()->Free(*this);
-	OwnerHeap.lock()->Free(Slot, NumDescriptors);
-	bValid = false;
+	if (!bValid)
+	{
+		OwnerHeap.lock()->Free(Slot, NumDescriptors);
+		bValid = false;
+	}
 }
 
 void CD3D12DescriptorHandle::operator+=(uint32 IncrementSize)
@@ -94,6 +97,7 @@ CD3D12DescriptorHeap::CD3D12DescriptorHeap(std::shared_ptr<CD3D12Device> Device,
 
 	MaxNumDescriptors = InMaxNumDescriptors;
 	IndexCreator.Init(MaxNumDescriptors);
+	InitAllocator();
 
 	D3D12_DESCRIPTOR_HEAP_DESC heapDesc = {};
 	heapDesc.NumDescriptors = MaxNumDescriptors;
@@ -148,7 +152,7 @@ void CD3D12DescriptorHeap::InitAllocator()
 {
 	// 첫 범위를 크게 하나로 만든다.
 	// |<-----------Range----------->|
-	Ranges.push_back({ 0, NumDescriptors - 1 });
+	Ranges.push_back({ 0, MaxNumDescriptors - 1 });
 }
 
 bool CD3D12DescriptorHeap::Allocate(uint32 NumDescriptors, uint32& OutSlot)

@@ -2,7 +2,7 @@
 #include "D3D12/D3D12Thirdparty.h"
 #include "D3D12/D3D12Definition.h"
 #include "Core/Types.h"
-
+#include <memory>
 class CD3D12DescriptorHeap;
 class CD3D12CommandAllocator;
 class CD3D12CommandList;
@@ -26,10 +26,11 @@ public:
 	~CD3D12Device();
 
 public:
+	void Init();
 	void Destroy();
 	uint64 GetCurrentContextIndex() const { return CurrentContextIndex; }
 
-	ComPtr<ID3D12Device12> GetDevice() { return Device; };
+	ComPtr<ID3D12Device5> GetDevice() { return Device; };
 	ComPtr<IDXGIAdapter1> GetAdapter() { return DxgiAdapter; }
 	ComPtr<IDXGIFactory7> GetDXGIFactory7() { return DxgiFactory7; }
 	ComPtr<ID3D12CommandQueue> GetCommandQueue() { return D3DCommandQueue; }
@@ -57,7 +58,8 @@ private:
 	void CreateFence();
 
 private:
-	ComPtr<ID3D12Device12> Device;
+	bool bDebugMode;
+	ComPtr<ID3D12Device5> Device;
 	ComPtr<IDXGIFactory2> DxgiFactory2;
 	ComPtr<IDXGIFactory7> DxgiFactory7;
 

@@ -25,7 +25,11 @@ CD3D12Resource::CD3D12Resource(ComPtr<ID3D12Resource> InResource)
 
 }
 
-CD3D12Resource::~CD3D12Resource() = default;
+//CD3D12Resource::~CD3D12Resource() = default;
+CD3D12Resource::~CD3D12Resource()
+{
+
+}
 
 void CD3D12Resource::SetName(const LPCTSTR& InName)
 {
@@ -36,6 +40,13 @@ void CD3D12Resource::SetName(const LPCTSTR& InName)
 ID3D12Resource* CD3D12Resource::GetResource() const
 {
 	return Resource.Get();
+}
+
+void CD3D12Resource::Destroy()
+{
+	RTVHandle.Free();
+	SRVHandle.Free();
+	UAVHandle.Free();
 }
 
 void CD3D12Resource::EmplaceSRV(const CD3D12DescriptorHandle& InSRVHandle)

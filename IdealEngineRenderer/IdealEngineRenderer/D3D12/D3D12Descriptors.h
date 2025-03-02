@@ -31,7 +31,7 @@ public:
 public:
 	D3D12_CPU_DESCRIPTOR_HANDLE GetCPUDescriptorHandleStart() const
 	{
-		if (!IsValid())
+		if (IsValid())
 		{
 			return CPUHandle;
 		}
@@ -42,7 +42,7 @@ public:
 	}
 	D3D12_GPU_DESCRIPTOR_HANDLE GetGPUDescriptorHandleStart() const
 	{
-		if (!IsValid())
+		if (IsValid())
 		{
 			return GPUHandle;
 		}
@@ -78,7 +78,6 @@ class CD3D12DescriptorHeap : public std::enable_shared_from_this<CD3D12Descripto
 
 public:
 	CD3D12DescriptorHeap(std::shared_ptr<CD3D12Device> Device, D3D12_DESCRIPTOR_HEAP_TYPE InHeapType, D3D12_DESCRIPTOR_HEAP_FLAGS InFlags, uint32 InxNumDescriptors);
-
 	CD3D12DescriptorHandle Allocate(uint32 NumDescriptors);
 	void Free(CD3D12DescriptorHandle& Handle);
 
