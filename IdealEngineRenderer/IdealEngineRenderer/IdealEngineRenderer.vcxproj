@@ -157,7 +157,16 @@
     <ClCompile Include="D3D12\D3D12Texture.cpp" />
     <ClCompile Include="D3D12\D3D12Util.cpp" />
     <ClCompile Include="D3D12\D3D12Viewport.cpp" />
+    <ClCompile Include="Graphics\Shader\DXCManager.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Graphics\Shader\D3DShader.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Graphics\RenderPasses\DeferredRenderPass.cpp" />
+    <ClCompile Include="Misc\Utils\FileUtils.cpp" />
     <ClCompile Include="Misc\Utils\IndexCreator.cpp" />
     <ClCompile Include="private\IdealRendererV2Factory.cpp" />
     <ClCompile Include="Graphics\RenderPasses\RenderPass.cpp" />
@@ -175,8 +184,17 @@
     <ClInclude Include="D3D12\D3D12Thirdparty.h" />
     <ClInclude Include="D3D12\D3D12Util.h" />
     <ClInclude Include="D3D12\D3D12Viewport.h" />
+    <ClInclude Include="Graphics\Shader\DXCManager.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Graphics\Shader\D3DShader.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Graphics\RenderPasses\DeferredRenderPass.h" />
     <ClInclude Include="Misc\Debugger\PIX.h" />
+    <ClInclude Include="Misc\Utils\FileUtils.h" />
     <ClInclude Include="Misc\Utils\IndexCreator.h" />
     <ClInclude Include="public\IdealRendererV2.h" />
     <ClInclude Include="public\IdealRendererV2Desc.h" />

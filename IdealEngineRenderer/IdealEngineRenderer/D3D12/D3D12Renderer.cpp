@@ -5,6 +5,9 @@
 #include "D3D12/D3D12Descriptors.h"
 #include "D3D12/D3D12Texture.h"
 #include "D3D12/D3D12Viewport.h"
+#include "Graphcis/Shader/D3DShader.h"
+#include "Graphcis/Shader/DXCManager.h"
+#include <dxcapi.h>
 
 CD3D12Renderer::CD3D12Renderer(const IdealRendererV2Desc& InRenderDesc)
 	: RendererDesc(InRenderDesc)
@@ -24,6 +27,10 @@ void CD3D12Renderer::Init()
 	//-------Swap Chain-------//
 	CreateSwapChains();
 
+	// Shader Compile Test
+	CDXCManager dxcManager;
+	ComPtr<IDxcBlob> VertexShaderBlob;
+	dxcManager.CompileShader(L"../Shaders/DebugMeshShader.hlsl", L"vs_6_3", L"VSMain", VertexShaderBlob);
 
 }
 
