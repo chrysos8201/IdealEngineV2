@@ -1,6 +1,6 @@
 #pragma once
-#include "D3D12Resource.h"
-#include "Core.h"
+#include "Core/Core.h"
+#include "D3D12/D3D12Resource.h"
 
 struct ID3D12Device;
 

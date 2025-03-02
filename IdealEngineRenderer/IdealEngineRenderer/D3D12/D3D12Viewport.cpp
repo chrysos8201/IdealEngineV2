@@ -1,4 +1,4 @@
-#include "D3D12Viewport.h"
+#include "D3D12/D3D12Viewport.h"
 
 CD3D12Viewport::CD3D12Viewport()
 	: Width(0)

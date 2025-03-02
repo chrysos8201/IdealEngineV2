@@ -1,6 +1,6 @@
 #pragma once
-#include "D3D12Thirdparty.h"
-#include "Core.h"
+#include "D3D12/D3D12Thirdparty.h"
+#include "Core/Core.h"
 
 class CD3D12Viewport
 {

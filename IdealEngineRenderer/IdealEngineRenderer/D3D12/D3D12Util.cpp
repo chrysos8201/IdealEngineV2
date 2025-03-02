@@ -1,5 +1,5 @@
-#include "D3D12Util.h"
-#include "D3D12Device.h"
+#include "D3D12/D3D12Util.h"
+#include "D3D12/D3D12Device.h"
 #include <format>
 
 #define D3DERR(x) case x: ErrorCodeText = std::format("{}", #x); break;

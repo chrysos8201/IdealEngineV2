@@ -1,6 +1,6 @@
-#include "D3D12Descriptors.h"
-#include "D3D12Util.h"
-#include "D3D12Device.h"
+#include "D3D12/D3D12Descriptors.h"
+#include "D3D12/D3D12Util.h"
+#include "D3D12/D3D12Device.h"
 
 
 CD3D12DescriptorHandle::CD3D12DescriptorHandle(CD3DX12_CPU_DESCRIPTOR_HANDLE InCPUHandle, CD3DX12_GPU_DESCRIPTOR_HANDLE InGPUHandle, uint32 InIndex, uint32 InNumDescriptors, uint32 InDescriptorHandleSize, bool ShaderVisible, std::shared_ptr<CD3D12DescriptorHeap> InOwnerHeap)

@@ -1,7 +1,7 @@
 #pragma once
-#include "D3D12Thirdparty.h"
-#include "D3D12Definition.h"
-#include "Types.h"
+#include "D3D12/D3D12Thirdparty.h"
+#include "D3D12/D3D12Definition.h"
+#include "Core/Types.h"
 
 class CD3D12DescriptorHeap;
 class CD3D12CommandAllocator;

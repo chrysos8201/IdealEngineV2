@@ -114,6 +114,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)IdealEngineRenderer\;$(SolutionDir)IdealEngineRenderer\public\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -132,6 +133,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)IdealEngineRenderer\;$(SolutionDir)IdealEngineRenderer\public\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -142,35 +144,38 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Core.h" />
-    <ClInclude Include="D3D12CommandList.h" />
-    <ClInclude Include="D3D12Definition.h" />
-    <ClInclude Include="D3D12Descriptors.h" />
-    <ClInclude Include="D3D12Device.h" />
-    <ClInclude Include="D3D12Renderer.h" />
-    <ClInclude Include="D3D12Resource.h" />
-    <ClInclude Include="D3D12Texture.h" />
-    <ClInclude Include="D3D12Thirdparty.h" />
-    <ClInclude Include="D3D12Util.h" />
-    <ClInclude Include="D3D12Viewport.h" />
-    <ClInclude Include="framework.h" />
-    <ClInclude Include="IndexCreator.h" />
-    <ClInclude Include="Types.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="D3D12CommandList.cpp" />
-    <ClCompile Include="D3D12Descriptors.cpp" />
-    <ClCompile Include="D3D12Device.cpp" />
-    <ClCompile Include="D3D12Renderer.cpp" />
-    <ClCompile Include="D3D12Resource.cpp" />
-    <ClCompile Include="D3D12Texture.cpp" />
-    <ClCompile Include="D3D12Util.cpp" />
-    <ClCompile Include="D3D12Viewport.cpp" />
-    <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="IndexCreator.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Core\dllmain.cpp" />
+    <ClCompile Include="D3D12\D3D12CommandList.cpp" />
+    <ClCompile Include="D3D12\D3D12Descriptors.cpp" />
+    <ClCompile Include="D3D12\D3D12Device.cpp" />
+    <ClCompile Include="D3D12\D3D12Renderer.cpp" />
+    <ClCompile Include="D3D12\D3D12Resource.cpp" />
+    <ClCompile Include="D3D12\D3D12Texture.cpp" />
+    <ClCompile Include="D3D12\D3D12Util.cpp" />
+    <ClCompile Include="D3D12\D3D12Viewport.cpp" />
+    <ClCompile Include="Misc\Utils\IndexCreator.cpp" />
+    <ClCompile Include="private\IdealRendererV2Factory.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Core\Core.h" />
+    <ClInclude Include="Core\Types.h" />
+    <ClInclude Include="D3D12\D3D12CommandList.h" />
+    <ClInclude Include="D3D12\D3D12Definition.h" />
+    <ClInclude Include="D3D12\D3D12Descriptors.h" />
+    <ClInclude Include="D3D12\D3D12Device.h" />
+    <ClInclude Include="D3D12\D3D12Renderer.h" />
+    <ClInclude Include="D3D12\D3D12Resource.h" />
+    <ClInclude Include="D3D12\D3D12Texture.h" />
+    <ClInclude Include="D3D12\D3D12Thirdparty.h" />
+    <ClInclude Include="D3D12\D3D12Util.h" />
+    <ClInclude Include="D3D12\D3D12Viewport.h" />
+    <ClInclude Include="Misc\Utils\IndexCreator.h" />
+    <ClInclude Include="public\IdealRendererV2.h" />
+    <ClInclude Include="public\IdealRendererV2Desc.h" />
+    <ClInclude Include="public\IdealRendererV2Factory.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,6 +1,6 @@
-#include "D3D12CommandList.h"
-#include "D3D12Device.h"
-#include "D3D12Util.h"
+#include "D3D12/D3D12CommandList.h"
+#include "D3D12/D3D12Device.h"
+#include "D3D12/D3D12Util.h"
 
 CD3D12CommandAllocator::CD3D12CommandAllocator(std::shared_ptr<CD3D12Device> Device, D3D12_COMMAND_LIST_TYPE InCommandListType)
 	: CommandListType(InCommandListType)

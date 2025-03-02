@@ -1,8 +1,8 @@
 #pragma once
-#include "Types.h"
-#include "D3D12Thirdparty.h"
-#include "D3D12Definition.h"
-#include "Core.h"
+#include "Core/Types.h"
+#include "D3D12/D3D12Thirdparty.h"
+#include "D3D12/D3D12Definition.h"
+#include "Core/Core.h"
 #include <string>
 #include <memory>
 

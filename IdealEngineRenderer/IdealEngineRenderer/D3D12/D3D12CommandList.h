@@ -1,5 +1,5 @@
 #pragma once
-#include "D3D12Thirdparty.h"
+#include "D3D12/D3D12Thirdparty.h"
 #include <memory>
 
 class CD3D12Device;

@@ -1,5 +1,5 @@
-#include "D3D12Resource.h"
-#include "D3D12Util.h"
+#include "D3D12/D3D12Resource.h"
+#include "D3D12/D3D12Util.h"
 
 CD3D12Resource::CD3D12Resource(uint32 InBufferSize)
 	: Resource()

@@ -1,7 +1,7 @@
 #pragma once
-#include "D3D12Thirdparty.h"
-#include "Types.h"
-#include "IndexCreator.h"
+#include "D3D12/D3D12Thirdparty.h"
+#include "Core/Types.h"
+#include "Misc/Utils/IndexCreator.h"
 #include <memory>
 #include <vector>
 

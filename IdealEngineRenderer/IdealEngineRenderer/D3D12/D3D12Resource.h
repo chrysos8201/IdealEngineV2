@@ -1,7 +1,7 @@
 #pragma once
-#include "D3D12Thirdparty.h"
-#include "Core.h"
-#include "D3D12Descriptors.h"
+#include "Core/Core.h"
+#include "D3D12/D3D12Thirdparty.h"
+#include "D3D12/D3D12Descriptors.h"
 
 class CD3D12DescriptorHandle;
 

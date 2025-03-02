@@ -1,12 +1,12 @@
-#include "D3D12Renderer.h"
-#include "D3D12CommandList.h"
-#include "D3D12Device.h"
-#include "D3D12Util.h"
-#include "D3D12Descriptors.h"
-#include "D3D12Texture.h"
-#include "D3D12Viewport.h"
+#include "D3D12/D3D12Renderer.h"
+#include "D3D12/D3D12CommandList.h"
+#include "D3D12/D3D12Device.h"
+#include "D3D12/D3D12Util.h"
+#include "D3D12/D3D12Descriptors.h"
+#include "D3D12/D3D12Texture.h"
+#include "D3D12/D3D12Viewport.h"
 
-CD3D12Renderer::CD3D12Renderer(const D3D12RendererDesc& InRenderDesc)
+CD3D12Renderer::CD3D12Renderer(const IdealRendererV2Desc& InRenderDesc)
 	: RendererDesc(InRenderDesc)
 {
 	Init();
@@ -81,7 +81,7 @@ void CD3D12Renderer::CreateSwapChains()
 	ComPtr<IDXGISwapChain1> swapChain;
 	VERIFYD3D12RESULT(Device->GetDXGIFactory7()->CreateSwapChainForHwnd(
 		Device->GetCommandQueue().Get(),
-		RendererDesc.Hwnd,
+		*(HWND*)RendererDesc.Hwnd,
 		&swapChainDesc,
 		nullptr,
 		nullptr,
@@ -89,7 +89,7 @@ void CD3D12Renderer::CreateSwapChains()
 	));
 
 	VERIFYD3D12RESULT(Device->GetDXGIFactory7()->MakeWindowAssociation(
-		RendererDesc.Hwnd,
+		*(HWND*)RendererDesc.Hwnd,
 		DXGI_MWA_NO_ALT_ENTER
 	));
 
