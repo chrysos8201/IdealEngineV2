@@ -9,10 +9,7 @@ CD3D12CommandAllocator::CD3D12CommandAllocator(std::shared_ptr<CD3D12Device> Dev
 
 }
 
-CD3D12CommandAllocator::~CD3D12CommandAllocator()
-{
-	CommandAllocator->Release();
-}
+CD3D12CommandAllocator::~CD3D12CommandAllocator() = default;
 
 void CD3D12CommandAllocator::Reset()
 {

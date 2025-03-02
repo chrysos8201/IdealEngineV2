@@ -80,6 +80,6 @@ private:
 	std::shared_ptr<CD3D12DescriptorHeap> CBV_SRV_UAV_Heap;
 	std::shared_ptr<CD3D12DescriptorHeap> ShaderVisibleHeap;
 
-	CD3D12CommandContext CommandContexts[3];
+	CD3D12CommandContext CommandContexts[MAX_PENDING_FRAME_COUNT];
 };
 
