@@ -172,6 +172,7 @@
     <ClInclude Include="D3D12\D3D12Thirdparty.h" />
     <ClInclude Include="D3D12\D3D12Util.h" />
     <ClInclude Include="D3D12\D3D12Viewport.h" />
+    <ClInclude Include="Misc\Debugger\PIX.h" />
     <ClInclude Include="Misc\Utils\IndexCreator.h" />
     <ClInclude Include="public\IdealRendererV2.h" />
     <ClInclude Include="public\IdealRendererV2Desc.h" />

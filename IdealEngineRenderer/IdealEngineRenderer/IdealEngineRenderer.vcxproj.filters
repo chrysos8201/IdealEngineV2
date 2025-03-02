@@ -96,5 +96,6 @@
     <ClInclude Include="public\IdealRendererV2.h" />
     <ClInclude Include="public\IdealRendererV2Factory.h" />
     <ClInclude Include="public\IdealRendererV2Desc.h" />
+    <ClInclude Include="Misc\Debugger\PIX.h" />
   </ItemGroup>
 </Project>

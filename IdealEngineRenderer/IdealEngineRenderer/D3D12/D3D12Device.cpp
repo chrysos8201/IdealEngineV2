@@ -3,6 +3,7 @@
 #include "D3D12/D3D12Util.h"
 #include "D3D12/D3D12CommandList.h"
 #include "D3D12/D3D12Resource.h"
+#include "Misc/Debugger/PIX.h"
 
 void CD3D12CommandContext::TransitionResource(std::shared_ptr<CD3D12Resource> Resource, D3D12_RESOURCE_STATES After)
 {
@@ -42,6 +43,13 @@ CD3D12Device::~CD3D12Device()
 
 void CD3D12Device::Init()
 {
+	if (bDebugMode)
+	{
+		if (GetModuleHandle(L"WinPixGpuCapturer.dll") == 0)
+		{
+			LoadLibrary(GetLatestWinPixGpuCapturerPath().c_str());
+		}
+	}
 	CreateDevice(bDebugMode);
 	CreateHeaps();
 	CreateFence();
