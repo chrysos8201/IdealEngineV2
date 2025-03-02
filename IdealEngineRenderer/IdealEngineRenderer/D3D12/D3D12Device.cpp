@@ -1,7 +1,6 @@
 #include "D3D12/D3D12Device.h"
 #include "D3D12/D3D12Descriptors.h"
 #include "D3D12/D3D12Util.h"
-#include "D3D12/D3D12CommandList.h"
 #include "D3D12/D3D12Resource.h"
 #include "Misc/Debugger/PIX.h"
 
@@ -17,6 +16,12 @@ void CD3D12CommandContext::TransitionResource(std::shared_ptr<CD3D12Resource> Re
 	CommandList->GetGraphicsCommandList()->ResourceBarrier(1, &barrier);
 	// 현재 리소스 상태 변경
 	Resource->SetResourceState(After);
+}
+
+void CD3D12CommandContext::Reset()
+{
+	CommandAllocator->Reset();
+	CommandList->Reset(CommandAllocator);
 }
 
 CD3D12Device::CD3D12Device(bool bWithDebug)
@@ -228,4 +233,38 @@ void CD3D12Device::CreateFence()
 	VERIFYD3D12RESULT(Device->CreateFence(0, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(D3DFence.GetAddressOf())););
 	FenceValue = 0;
 	FenceEvent = CreateEvent(nullptr, FALSE, FALSE, nullptr);
+}
+
+std::shared_ptr<CD3D12IndexBuffer> CD3D12Device::CreateIndexBuffer(std::vector<uint32>& Indices)
+{
+	CommandContexts[CurrentContextIndex].Reset();
+
+	const uint32 elementSize = sizeof(uint32);
+	const uint32 elementCount = (uint32)Indices.size();
+	const uint32 bufferSize = elementSize * elementCount;
+
+
+	CD3D12UploadBuffer uploadBuffer(Device.Get(), bufferSize);
+	{
+		void* mappedData = uploadBuffer.Map();
+		memcpy(mappedData, Indices.data(), bufferSize);
+		uploadBuffer.UnMap();
+	}
+	std::shared_ptr<CD3D12IndexBuffer> OutIndexBuffer
+		= std::make_shared<CD3D12IndexBuffer>(
+			Device.Get()
+			, CommandContexts[CurrentContextIndex].CommandList->GetGraphicsCommandList().Get()
+			, elementSize
+			, elementCount
+			, uploadBuffer
+		);
+
+	//-----------Execute-----------//
+	CommandContexts[CurrentContextIndex].CommandList->Close();
+	ID3D12CommandList* ppCommandLists[] = { CommandContexts[CurrentContextIndex].CommandList->GetGraphicsCommandList().Get() };
+	D3DCommandQueue->ExecuteCommandLists(_countof(ppCommandLists), ppCommandLists);
+	Fence();
+	WaitForFenceValue(FenceValue);
+
+	return OutIndexBuffer;
 }

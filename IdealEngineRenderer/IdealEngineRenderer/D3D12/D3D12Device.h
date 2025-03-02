@@ -1,6 +1,8 @@
 #pragma once
 #include "D3D12/D3D12Thirdparty.h"
 #include "D3D12/D3D12Definition.h"
+#include "D3D12/D3D12Resource.h"
+#include "D3D12/D3D12CommandList.h"
 #include "Core/Types.h"
 #include <memory>
 class CD3D12DescriptorHeap;
@@ -14,6 +16,7 @@ struct CD3D12CommandContext
 	std::shared_ptr<CD3D12CommandList> CommandList;
 
 	void TransitionResource(std::shared_ptr<CD3D12Resource> Resource, D3D12_RESOURCE_STATES After);
+	void Reset();
 };
 
 class CD3D12Device : public std::enable_shared_from_this<CD3D12Device>
@@ -81,5 +84,39 @@ private:
 	std::shared_ptr<CD3D12DescriptorHeap> ShaderVisibleHeap;
 
 	CD3D12CommandContext CommandContexts[MAX_PENDING_FRAME_COUNT];
+
+public:
+	// Resource Manager
+
+private:
+	template <typename TVertexType>
+	std::shared_ptr<CD3D12VertexBuffer> CreateVertexBuffer(std::vector<TVertexType>& Vertices)
+	{
+		CommandContexts[CurrentContextIndex]->Reset();
+
+		const uint32 elementSize = sizeof(TVertexType);
+		const uint32 elementCount = (uint32)Vertices.size();
+		const uint32 bufferSize = elementSize * elementCount;
+
+		CD3D12UploadBuffer uploadBuffer(Device.Get(), bufferSize);
+		{
+			void* mappedData = uploadBuffer.Map();
+			memcpy(mappedData, Vertices.data(), bufferSize);
+			uploadBuffer.UnMap();
+		}
+		std::shared_ptr<CD3D12VertexBuffer> OutVertexBuffer
+			= std::make_shared<CD3D12VertexBuffer>(Device.Get(), bufferSize, elementSize, elementCount);
+
+		//Execute
+		CommandContexts[CurrentContextIndex].CommandList->Close();
+		ID3D12CommandList* ppCommandLists[] = { CommandContexts[CurrentContextIndex].CommandList->GetGraphicsCommandList().Get() };
+		D3DCommandQueue->ExecuteCommandLists(_countof(ppCommandLists), ppCommandLists);
+		Fence();
+		WaitForFenceValue(FenceValue);
+
+		return OutVertexBuffer;
+	}
+
+	std::shared_ptr<CD3D12IndexBuffer> CreateIndexBuffer(std::vector<uint32>& Indices);
 };
 

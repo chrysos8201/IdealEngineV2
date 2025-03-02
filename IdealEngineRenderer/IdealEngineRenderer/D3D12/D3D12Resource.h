@@ -62,9 +62,6 @@ public:
 
 	void* Map();
 	void UnMap();
-
-
-
 };
 
 class CD3D12GPUBuffer : public CD3D12Resource
@@ -76,8 +73,40 @@ public:
 	inline uint32 GetElementCount() const { return ElementCount; };
 	inline uint32 GetElementSize() const { return ElementSize; }
 
-private:
+protected:
 	uint32 BufferSize;
 	uint32 ElementSize;
 	uint32 ElementCount;
+};
+
+class CD3D12VertexBuffer : public CD3D12GPUBuffer
+{
+public:
+	CD3D12VertexBuffer(
+		ID3D12Device* Device
+		, ID3D12GraphicsCommandList* CommandList
+		, uint32 ElementSize, uint32 ElementCount
+		, const CD3D12UploadBuffer& UploadBuffer
+	);
+
+	D3D12_VERTEX_BUFFER_VIEW GetView() const { return VertexBufferView; }
+
+private:
+	D3D12_VERTEX_BUFFER_VIEW VertexBufferView;
+};
+
+class CD3D12IndexBuffer : public CD3D12GPUBuffer
+{
+public:
+	CD3D12IndexBuffer(
+		ID3D12Device* Device
+		, ID3D12GraphicsCommandList* CommandList
+		, uint32 ElementSize, uint32 ElementCount
+		, const CD3D12UploadBuffer& UploadBuffer
+	);
+
+	D3D12_INDEX_BUFFER_VIEW GetView() const { return IndexBufferView; }
+
+private:
+	D3D12_INDEX_BUFFER_VIEW IndexBufferView;
 };

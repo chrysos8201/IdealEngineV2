@@ -128,3 +128,45 @@ CD3D12GPUBuffer::CD3D12GPUBuffer(ID3D12Device* Device, uint32 InElementSize, uin
 		IID_PPV_ARGS(Resource.GetAddressOf())
 	));
 }
+
+//////////////////////////////////
+// Vertex Buffer
+CD3D12VertexBuffer::CD3D12VertexBuffer(ID3D12Device* Device, ID3D12GraphicsCommandList* CommandList, uint32 ElementSize, uint32 ElementCount, const CD3D12UploadBuffer& UploadBuffer)
+	: CD3D12GPUBuffer(Device, ElementSize, ElementCount)
+{
+	// 데이터를 복사한다
+	CommandList->CopyBufferRegion(Resource.Get(), 0, UploadBuffer.GetResource(), 0, BufferSize);
+
+	CD3DX12_RESOURCE_BARRIER resourceBarrier
+		= CD3DX12_RESOURCE_BARRIER::Transition(
+			Resource.Get(),
+			D3D12_RESOURCE_STATE_COPY_DEST,
+			D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER
+		);
+	SetResourceState(D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER);
+	CommandList->ResourceBarrier(1, &resourceBarrier);
+
+	VertexBufferView.BufferLocation = Resource->GetGPUVirtualAddress();
+	VertexBufferView.SizeInBytes = BufferSize;
+	VertexBufferView.StrideInBytes = ElementSize;
+}
+
+CD3D12IndexBuffer::CD3D12IndexBuffer(ID3D12Device* Device, ID3D12GraphicsCommandList* CommandList, uint32 ElementSize, uint32 ElementCount, const CD3D12UploadBuffer& UploadBuffer)
+	: CD3D12GPUBuffer(Device, ElementSize, ElementCount)
+{
+		// 데이터를 복사한다
+	CommandList->CopyBufferRegion(Resource.Get(), 0, UploadBuffer.GetResource(), 0, BufferSize);
+
+	CD3DX12_RESOURCE_BARRIER resourceBarrier
+		= CD3DX12_RESOURCE_BARRIER::Transition(
+			Resource.Get(),
+			D3D12_RESOURCE_STATE_COPY_DEST,
+			D3D12_RESOURCE_STATE_INDEX_BUFFER
+		);
+	SetResourceState(D3D12_RESOURCE_STATE_INDEX_BUFFER);
+	CommandList->ResourceBarrier(1, &resourceBarrier);
+
+	IndexBufferView.BufferLocation = Resource->GetGPUVirtualAddress();
+	IndexBufferView.SizeInBytes = BufferSize;
+	IndexBufferView.Format = ElementSize == 2 ? DXGI_FORMAT_R16_UINT : DXGI_FORMAT_R32_UINT;
+}
