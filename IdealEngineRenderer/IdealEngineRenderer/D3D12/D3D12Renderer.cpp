@@ -5,8 +5,8 @@
 #include "D3D12/D3D12Descriptors.h"
 #include "D3D12/D3D12Texture.h"
 #include "D3D12/D3D12Viewport.h"
-#include "Graphcis/Shader/D3DShader.h"
-#include "Graphcis/Shader/DXCManager.h"
+#include "Graphics/Shader/D3DShader.h"
+#include "Graphics/Shader/DXCManager.h"
 #include <dxcapi.h>
 
 CD3D12Renderer::CD3D12Renderer(const IdealRendererV2Desc& InRenderDesc)
@@ -28,10 +28,26 @@ void CD3D12Renderer::Init()
 	CreateSwapChains();
 
 	// Shader Compile Test
-	CDXCManager dxcManager;
-	ComPtr<IDxcBlob> VertexShaderBlob;
-	dxcManager.CompileShader(L"../Shaders/DebugMeshShader.hlsl", L"vs_6_3", L"VSMain", VertexShaderBlob);
-
+	// Load
+	{
+		CDXCManager dxcManager;
+		ComPtr<IDxcBlob> VertexShaderBlob;
+		dxcManager.CompileShaderAndSave(
+			L"../Shaders/DebugMeshShader.hlsl"
+			, L"../Shaders/"
+			, L"DebugMeshShader"
+			, L"vs_6_3"
+			, VertexShaderBlob
+			, L"VSMain"
+			, true
+		);
+	}
+	// Create
+	std::shared_ptr<CD3DShader> VertexShader = std::make_shared<CD3DShader>();
+	{
+		CDXCManager dxcManager;
+		dxcManager.LoadShaderFile(L"../Shaders/DebugMeshShader.shader", VertexShader);
+	}
 }
 
 void CD3D12Renderer::Render()
