@@ -52,6 +52,8 @@
       <Filter>Misc\Utils</Filter>
     </ClCompile>
     <ClCompile Include="private\IdealRendererV2Factory.cpp" />
+    <ClCompile Include="Graphics\RenderPasses\RenderPass.cpp" />
+    <ClCompile Include="Graphics\RenderPasses\DeferredRenderPass.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D3D12\D3D12CommandList.h">
@@ -97,5 +99,7 @@
     <ClInclude Include="public\IdealRendererV2Factory.h" />
     <ClInclude Include="public\IdealRendererV2Desc.h" />
     <ClInclude Include="Misc\Debugger\PIX.h" />
+    <ClInclude Include="Graphics\RenderPasses\RenderPass.h" />
+    <ClInclude Include="Graphics\RenderPasses\DeferredRenderPass.h" />
   </ItemGroup>
 </Project>

@@ -156,8 +156,10 @@
     <ClCompile Include="D3D12\D3D12Texture.cpp" />
     <ClCompile Include="D3D12\D3D12Util.cpp" />
     <ClCompile Include="D3D12\D3D12Viewport.cpp" />
+    <ClCompile Include="Graphics\RenderPasses\DeferredRenderPass.cpp" />
     <ClCompile Include="Misc\Utils\IndexCreator.cpp" />
     <ClCompile Include="private\IdealRendererV2Factory.cpp" />
+    <ClCompile Include="Graphics\RenderPasses\RenderPass.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Core.h" />
@@ -172,11 +174,13 @@
     <ClInclude Include="D3D12\D3D12Thirdparty.h" />
     <ClInclude Include="D3D12\D3D12Util.h" />
     <ClInclude Include="D3D12\D3D12Viewport.h" />
+    <ClInclude Include="Graphics\RenderPasses\DeferredRenderPass.h" />
     <ClInclude Include="Misc\Debugger\PIX.h" />
     <ClInclude Include="Misc\Utils\IndexCreator.h" />
     <ClInclude Include="public\IdealRendererV2.h" />
     <ClInclude Include="public\IdealRendererV2Desc.h" />
     <ClInclude Include="public\IdealRendererV2Factory.h" />
+    <ClInclude Include="Graphics\RenderPasses\RenderPass.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
