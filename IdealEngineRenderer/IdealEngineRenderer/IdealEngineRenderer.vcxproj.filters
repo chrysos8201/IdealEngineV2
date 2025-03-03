@@ -19,6 +19,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Misc\Utils\SimpleMath.inl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D3D12\D3D12CommandList.cpp">
@@ -57,6 +58,12 @@
     <ClCompile Include="Graphics\Shader\D3DShader.cpp" />
     <ClCompile Include="Graphics\Shader\DXCManager.cpp" />
     <ClCompile Include="Misc\Utils\FileUtils.cpp" />
+    <ClCompile Include="Graphics\Resources\IdealMesh.cpp" />
+    <ClCompile Include="Misc\Utils\StringUtils.cpp" />
+    <ClCompile Include="Misc\Utils\SimpleMath.cpp" />
+    <ClCompile Include="Graphics\Resources\VertexInfo.cpp" />
+    <ClCompile Include="Misc\Assimp\AssimpConverter.cpp" />
+    <ClCompile Include="Misc\Utils\tinyxml2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D3D12\D3D12CommandList.h">
@@ -107,5 +114,12 @@
     <ClInclude Include="Graphics\Shader\D3DShader.h" />
     <ClInclude Include="Graphics\Shader\DXCManager.h" />
     <ClInclude Include="Misc\Utils\FileUtils.h" />
+    <ClInclude Include="Graphics\Resources\IdealMesh.h" />
+    <ClInclude Include="Misc\Utils\StringUtils.h" />
+    <ClInclude Include="Misc\Utils\SimpleMath.h" />
+    <ClInclude Include="Graphics\Resources\VertexInfo.h" />
+    <ClInclude Include="Misc\Assimp\AssimpConverter.h" />
+    <ClInclude Include="Misc\Assimp\AssimpConvertType.h" />
+    <ClInclude Include="Misc\Utils\tinyxml2.h" />
   </ItemGroup>
 </Project>

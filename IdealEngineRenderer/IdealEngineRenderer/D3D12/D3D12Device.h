@@ -4,11 +4,16 @@
 #include "D3D12/D3D12Resource.h"
 #include "D3D12/D3D12CommandList.h"
 #include "Core/Types.h"
+#include "Graphics/Resources/VertexInfo.h"
+#include <unordered_map>
 #include <memory>
 class CD3D12DescriptorHeap;
 class CD3D12CommandAllocator;
 class CD3D12CommandList;
 class CD3D12Resource;
+
+template <typename>
+class CIdealMesh;
 
 struct CD3D12CommandContext
 {
@@ -118,5 +123,9 @@ private:
 	}
 
 	std::shared_ptr<CD3D12IndexBuffer> CreateIndexBuffer(std::vector<uint32>& Indices);
+
+private:
+	void LoadMesh(const std::wstring& Path);
+	std::unordered_map<std::string, std::shared_ptr<CIdealMesh<BasicVertex>>> Meshes;
 };
 

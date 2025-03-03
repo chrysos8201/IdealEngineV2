@@ -1,6 +1,5 @@
 #pragma once
-
-
+#include <string>
 
 namespace Ideal
 {
@@ -14,6 +13,9 @@ namespace Ideal
 		virtual void Init() abstract;
 		virtual void Render() abstract;
 		virtual void Destroy() abstract;
+
+	public:
+		virtual void LoadStaticMeshObject(const std::wstring& Path) abstract;
 	};
 
 }

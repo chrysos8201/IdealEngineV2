@@ -115,7 +115,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)IdealEngineRenderer\;$(SolutionDir)IdealEngineRenderer\public\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)IdealEngineRenderer\;$(SolutionDir)IdealEngineRenderer\public\;$(SolutionDir)IdealEngineRenderer\ThirdParty\Include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -135,7 +135,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)IdealEngineRenderer\;$(SolutionDir)IdealEngineRenderer\public\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)IdealEngineRenderer\;$(SolutionDir)IdealEngineRenderer\public\;$(SolutionDir)IdealEngineRenderer\ThirdParty\Include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -146,6 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="Misc\Utils\SimpleMath.inl" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -167,10 +168,16 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Graphics\RenderPasses\DeferredRenderPass.cpp" />
+    <ClCompile Include="Graphics\Resources\IdealMesh.cpp" />
+    <ClCompile Include="Misc\Assimp\AssimpConverter.cpp" />
     <ClCompile Include="Misc\Utils\FileUtils.cpp" />
     <ClCompile Include="Misc\Utils\IndexCreator.cpp" />
+    <ClCompile Include="Misc\Utils\SimpleMath.cpp" />
+    <ClCompile Include="Misc\Utils\tinyxml2.cpp" />
     <ClCompile Include="private\IdealRendererV2Factory.cpp" />
     <ClCompile Include="Graphics\RenderPasses\RenderPass.cpp" />
+    <ClCompile Include="Misc\Utils\StringUtils.cpp" />
+    <ClCompile Include="Graphics\Resources\VertexInfo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Core.h" />
@@ -194,13 +201,20 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Graphics\RenderPasses\DeferredRenderPass.h" />
+    <ClInclude Include="Graphics\Resources\IdealMesh.h" />
+    <ClInclude Include="Misc\Assimp\AssimpConverter.h" />
+    <ClInclude Include="Misc\Assimp\AssimpConvertType.h" />
     <ClInclude Include="Misc\Debugger\PIX.h" />
     <ClInclude Include="Misc\Utils\FileUtils.h" />
     <ClInclude Include="Misc\Utils\IndexCreator.h" />
+    <ClInclude Include="Misc\Utils\SimpleMath.h" />
+    <ClInclude Include="Misc\Utils\tinyxml2.h" />
     <ClInclude Include="public\IdealRendererV2.h" />
     <ClInclude Include="public\IdealRendererV2Desc.h" />
     <ClInclude Include="public\IdealRendererV2Factory.h" />
     <ClInclude Include="Graphics\RenderPasses\RenderPass.h" />
+    <ClInclude Include="Misc\Utils\StringUtils.h" />
+    <ClInclude Include="Graphics\Resources\VertexInfo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

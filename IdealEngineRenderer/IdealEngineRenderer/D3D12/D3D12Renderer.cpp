@@ -17,8 +17,7 @@ CD3D12Renderer::CD3D12Renderer(const IdealRendererV2Desc& InRenderDesc)
 
 void CD3D12Renderer::Init()
 {
-	bool bDebugMode = true;
-	Device = std::make_shared<CD3D12Device>(bDebugMode);
+	Device = std::make_shared<CD3D12Device>(RendererDesc.bDebugMode);
 	Device->Init();
 
 	//-------Viewport-------//
@@ -101,6 +100,11 @@ void CD3D12Renderer::Destroy()
 	SwapChainTextures.clear();
 
 	Device->Destroy();
+}
+
+void CD3D12Renderer::LoadStaticMeshObject(const std::wstring& Path)
+{
+
 }
 
 void CD3D12Renderer::CreateSwapChains()

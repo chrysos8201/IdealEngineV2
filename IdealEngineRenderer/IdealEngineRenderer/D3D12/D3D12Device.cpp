@@ -3,6 +3,9 @@
 #include "D3D12/D3D12Util.h"
 #include "D3D12/D3D12Resource.h"
 #include "Misc/Debugger/PIX.h"
+#include "Misc/Utils/StringUtils.h"
+#include "Misc/Utils/FileUtils.h"
+#include "Graphics/Resources/IdealMesh.h"
 
 void CD3D12CommandContext::TransitionResource(std::shared_ptr<CD3D12Resource> Resource, D3D12_RESOURCE_STATES After)
 {
@@ -123,10 +126,10 @@ void CD3D12Device::CreateDevice(bool bWithDebug)
 		if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(debugController.GetAddressOf()))))
 		{
 			debugController->EnableDebugLayer();
-			
+
 		}
 	}
-	
+
 	CreateDXGIFactory(true);
 	CreateDXGIAdapter(); // CreateDevice
 	CreateCommandQueue();
@@ -267,4 +270,50 @@ std::shared_ptr<CD3D12IndexBuffer> CD3D12Device::CreateIndexBuffer(std::vector<u
 	WaitForFenceValue(FenceValue);
 
 	return OutIndexBuffer;
+}
+
+void CD3D12Device::LoadMesh(const std::wstring& Path)
+{
+	std::string key = StringUtils::ConvertWStringToString(Path);
+	std::shared_ptr<CIdealMesh<BasicVertex>> mesh = std::make_shared<CIdealMesh<BasicVertex>>();
+	mesh = Meshes[key];
+	if (mesh != nullptr)
+	{
+		return;
+	}
+
+	mesh = std::make_shared<CIdealMesh<BasicVertex>>();
+	{
+		std::wstring fullPath = Path + L".mesh";
+		std::shared_ptr<FileUtils> file = std::make_shared<FileUtils>();
+		file->Open(fullPath, FileMode::Read);
+
+		{
+			// TEMP
+			const uint32 count = file->Read<uint32>();
+
+			for (uint32 i = 0; i < count; i++)
+			{
+				file->Read<int32>();
+				file->Read<std::string>();
+				file->Read<int32>();
+				file->Read<Matrix>();
+			}
+		}
+		{
+			const uint32 count = file->Read<uint32>();
+			for (uint32 i = 0; i < count; i++)
+			{
+				std::shared_ptr<CIdealMesh<BasicVertex>> basicMesh = std::make_shared<CIdealMesh<BasicVertex>>();
+				// 필요없는 거
+				file->Read<Matrix>();
+				//이름
+				file->Read<std::string>();
+				// 본 인덱스
+				file->Read<int32>();
+				// 필요없는거
+				file->Read<std::string>();
+			}
+		}
+	}
 }

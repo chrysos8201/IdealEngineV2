@@ -66,6 +66,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	rendererDesc.Width = WIDTH;
 	rendererDesc.Height = HEIGHT;
 	rendererDesc.bDebugMode = true;
+	//rendererDesc.bDebugMode = false;
 	rendererDesc.bTearingSupport = true;
 
 	std::shared_ptr<Ideal::IdealRendererV2> IdealRenderer;

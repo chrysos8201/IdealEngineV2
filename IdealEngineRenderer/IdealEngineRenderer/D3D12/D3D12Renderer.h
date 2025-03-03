@@ -26,6 +26,9 @@ public:
 	virtual void Render() override;
 	virtual void Destroy() override;
 
+public:
+	virtual void LoadStaticMeshObject(const std::wstring& Path) override;
+
 private:
 	void CreateSwapChains();
 
